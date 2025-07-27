@@ -3,23 +3,25 @@
 {% block title %}Products - ChazeFashion{% endblock %}
 
 {% block content %}
-<div class="container mx-auto">
-    <h1 class="text-3xl font-bold mb-8">Our Products</h1>
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-white">
+        <span class="text-gradient">Our Products</span>
+    </h1>
     
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Filters Sidebar -->
         <div class="lg:col-span-1">
-            <div class="card bg-base-100 shadow-xl">
+            <div class="card glass-effect">
                 <div class="card-body">
-                    <h2 class="card-title text-lg mb-4">Filters</h2>
+                    <h2 class="card-title text-lg mb-4 text-white">Filters</h2>
                     
                     <form method="get" class="space-y-4">
                         <!-- Category Filter -->
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text font-semibold">Category</span>
+                                <span class="label-text font-semibold text-white">Category</span>
                             </label>
-                            <select name="category" class="select select-bordered w-full">
+                            <select name="category" class="select select-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white">
                                 <option value="">All Categories</option>
                                 {% for value, label in categories %}
                                     <option value="{{ value }}" {% if request.GET.category == value %}selected{% endif %}>
@@ -32,9 +34,9 @@
                         <!-- Season Filter -->
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text font-semibold">Season</span>
+                                <span class="label-text font-semibold text-white">Season</span>
                             </label>
-                            <select name="season" class="select select-bordered w-full">
+                            <select name="season" class="select select-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white">
                                 <option value="">All Seasons</option>
                                 {% for value, label in seasons %}
                                     <option value="{{ value }}" {% if request.GET.season == value %}selected{% endif %}>
@@ -47,36 +49,36 @@
                         <!-- Price Range -->
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text font-semibold">Price Range</span>
+                                <span class="label-text font-semibold text-white">Price Range</span>
                             </label>
                             <div class="flex gap-2">
                                 <input type="number" name="price_min" placeholder="Min" 
                                        value="{{ request.GET.price_min }}" 
-                                       class="input input-bordered w-full" />
+                                       class="input input-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50" />
                                 <input type="number" name="price_max" placeholder="Max" 
                                        value="{{ request.GET.price_max }}" 
-                                       class="input input-bordered w-full" />
+                                       class="input input-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50" />
                             </div>
                         </div>
                         
                         <!-- Fabric Filter -->
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text font-semibold">Fabric</span>
+                                <span class="label-text font-semibold text-white">Fabric</span>
                             </label>
                             <input type="text" name="fabric" placeholder="e.g., Cotton, Silk" 
                                    value="{{ request.GET.fabric }}" 
-                                   class="input input-bordered w-full" />
+                                   class="input input-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50" />
                         </div>
                         
                         <!-- Brand Filter -->
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text font-semibold">Brand</span>
+                                <span class="label-text font-semibold text-white">Brand</span>
                             </label>
                             <input type="text" name="brand" placeholder="Search by brand" 
                                    value="{{ request.GET.brand }}" 
-                                   class="input input-bordered w-full" />
+                                   class="input input-bordered w-full bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50" />
                         </div>
                         
                         <!-- Apply Filters Button -->
@@ -86,7 +88,7 @@
                         
                         <!-- Clear Filters -->
                         <div class="form-control">
-                            <a href="{% url 'product_list' %}" class="btn btn-outline">Clear Filters</a>
+                            <a href="{% url 'product_list' %}" class="btn btn-outline text-white border-white hover:bg-white hover:text-gray-900">Clear Filters</a>
                         </div>
                     </form>
                 </div>
@@ -97,65 +99,44 @@
         <div class="lg:col-span-3">
             <!-- Results Count -->
             <div class="flex justify-between items-center mb-6">
-                <p class="text-base-content opacity-70">
+                <p class="text-white opacity-70">
                     Showing {{ products.count }} product{{ products.count|pluralize }}
                 </p>
             </div>
             
             <!-- Products Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for product in products %}
-                <div class="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+                <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
                     <figure class="px-4 pt-4">
                         {% if product.pr_images %}
-                            <img src="{{ product.pr_images.url }}" alt="{{ product.pr_name }}" 
-                                 class="rounded-xl h-48 w-full object-cover" />
+                            <img src="{{ product.pr_images.url }}" alt="{{ product.pr_name }}" class="rounded-xl h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300" />
                         {% else %}
-                            <div class="bg-base-300 rounded-xl h-48 w-full flex items-center justify-center">
-                                <i class="fas fa-tshirt text-6xl text-base-content opacity-50"></i>
+                            <div class="bg-base-300 rounded-xl h-48 w-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                                <i class="fas fa-tshirt text-6xl text-white opacity-50"></i>
                             </div>
                         {% endif %}
                     </figure>
                     <div class="card-body">
-                        <h2 class="card-title">{{ product.pr_name }}</h2>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="badge badge-primary">{{ product.pr_cate }}</span>
-                            <span class="badge badge-secondary">{{ product.pr_season }}</span>
-                        </div>
-                        
-                        {% if product.pr_brand %}
-                            <p class="text-sm text-base-content opacity-70">Brand: {{ product.pr_brand }}</p>
-                        {% endif %}
-                        
-                        {% if product.pr_fabric %}
-                            <p class="text-sm text-base-content opacity-70">Fabric: {{ product.pr_fabric }}</p>
-                        {% endif %}
-                        
-                        <div class="flex items-center justify-between mb-2">
+                        <h3 class="card-title text-white text-lg">{{ product.pr_name }}</h3>
+                        <p class="text-white opacity-70 text-sm">{{ product.pr_cate }}</p>
+                        <div class="flex items-center justify-between mb-4">
                             <div class="text-2xl font-bold text-primary">${{ product.pr_price }}</div>
                             <div class="rating rating-sm">
                                 {% for i in "12345" %}
                                     {% if forloop.counter <= product.pr_reviews %}
-                                        <input type="radio" name="rating-{{ product.pr_id }}" 
-                                               class="mask mask-star-2 bg-orange-400" checked disabled />
+                                        <input type="radio" name="rating-{{ product.pr_id }}" class="mask mask-star-2 bg-orange-400" checked disabled />
                                     {% else %}
-                                        <input type="radio" name="rating-{{ product.pr_id }}" 
-                                               class="mask mask-star-2 bg-orange-400" disabled />
+                                        <input type="radio" name="rating-{{ product.pr_id }}" class="mask mask-star-2 bg-orange-400" disabled />
                                     {% endif %}
                                 {% endfor %}
                             </div>
                         </div>
-                        
                         <div class="card-actions justify-end">
-                            <a href="{% url 'product_detail' product.pr_id %}" class="btn btn-primary btn-sm">
-                                View Details
-                            </a>
+                            <a href="{% url 'product_detail' product.pr_id %}" class="btn btn-primary btn-sm">View Details</a>
                             {% if user.is_authenticated %}
-                                <a href="{% url 'add_to_cart' product.pr_id %}" class="btn btn-outline btn-sm">
+                                <a href="{% url 'add_to_cart' product.pr_id %}" class="btn btn-outline btn-sm text-white border-white hover:bg-white hover:text-gray-900">
                                     <i class="fas fa-shopping-cart"></i>
-                                </a>
-                                <a href="{% url 'add_to_wishlist' product.pr_id %}" class="btn btn-outline btn-sm">
-                                    <i class="fas fa-heart"></i>
                                 </a>
                             {% endif %}
                         </div>
@@ -163,12 +144,9 @@
                 </div>
                 {% empty %}
                 <div class="col-span-full text-center py-12">
-                    <div class="text-6xl mb-4">🔍</div>
-                    <h3 class="text-xl font-semibold mb-2">No products found</h3>
-                    <p class="text-base-content opacity-70 mb-4">
-                        Try adjusting your filters or browse all products.
-                    </p>
-                    <a href="{% url 'product_list' %}" class="btn btn-primary">View All Products</a>
+                    <div class="text-6xl mb-4 animate-pulse-slow">👕</div>
+                    <h3 class="text-xl font-semibold mb-2 text-white">No products found</h3>
+                    <p class="text-white opacity-70">Try adjusting your filters or check back later!</p>
                 </div>
                 {% endfor %}
             </div>

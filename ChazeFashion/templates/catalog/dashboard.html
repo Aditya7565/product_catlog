@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% block title %}ChazeFashion - Dashboard{% endblock %}
+
+{% block content %}
+<!-- Dashboard Header -->
+<div class="hero min-h-[40vh] relative overflow-hidden">
+    <div class="hero-content text-center text-white relative z-10">
+        <div class="max-w-4xl">
+            <h1 class="mb-5 text-5xl font-bold animate-float">
+                <span class="text-gradient">Welcome to Your Dashboard</span>
+            </h1>
+            <p class="mb-8 text-xl opacity-90">Track your fashion journey and discover amazing trends</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="stat glass-effect rounded-lg p-6 text-center">
+                    <div class="stat-title text-white opacity-70">Total Products</div>
+                    <div class="stat-value text-primary">{{ total_products|default:"0" }}</div>
+                    <div class="stat-desc text-white opacity-60">Available items</div>
+                </div>
+                <div class="stat glass-effect rounded-lg p-6 text-center">
+                    <div class="stat-title text-white opacity-70">Categories</div>
+                    <div class="stat-value text-secondary">{{ total_categories|default:"5" }}</div>
+                    <div class="stat-desc text-white opacity-60">Fashion categories</div>
+                </div>
+                <div class="stat glass-effect rounded-lg p-6 text-center">
+                    <div class="stat-title text-white opacity-70">Wishlist Items</div>
+                    <div class="stat-value text-accent">{{ wishlist_count|default:"0" }}</div>
+                    <div class="stat-desc text-white opacity-60">Saved for later</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions Section -->
+<div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="card glass-effect hover:scale-105 transition-transform duration-300">
+            <div class="card-body text-center">
+                <div class="text-4xl mb-4">🛍️</div>
+                <h3 class="card-title justify-center text-white">Shop Products</h3>
+                <p class="text-white opacity-70 mb-4">Explore our latest fashion collection</p>
+                <a href="{% url 'product_list' %}" class="btn btn-primary w-full">Browse Now</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-transform duration-300">
+            <div class="card-body text-center">
+                <div class="text-4xl mb-4">❤️</div>
+                <h3 class="card-title justify-center text-white">My Wishlist</h3>
+                <p class="text-white opacity-70 mb-4">View your saved items</p>
+                <a href="{% url 'wishlist' %}" class="btn btn-secondary w-full">View Wishlist</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-transform duration-300">
+            <div class="card-body text-center">
+                <div class="text-4xl mb-4">👤</div>
+                <h3 class="card-title justify-center text-white">My Profile</h3>
+                <p class="text-white opacity-70 mb-4">Manage your account settings</p>
+                <a href="{% url 'profile' %}" class="btn btn-accent w-full">View Profile</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-transform duration-300">
+            <div class="card-body text-center">
+                <div class="text-4xl mb-4">📊</div>
+                <h3 class="card-title justify-center text-white">Analytics</h3>
+                <p class="text-white opacity-70 mb-4">View your shopping insights</p>
+                <button class="btn btn-info w-full">View Analytics</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Categories Section -->
+<div class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-12 text-white">
+        <span class="text-gradient">Shop by Category</span>
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <div class="card-body text-center p-6">
+                <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">👨</div>
+                <h3 class="card-title justify-center text-white text-lg">Men</h3>
+                <p class="text-white opacity-70 text-sm mb-4">Stylish clothing for men</p>
+                <a href="{% url 'product_list' %}?category=Men" class="btn btn-primary btn-sm w-full">Shop Men</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <div class="card-body text-center p-6">
+                <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">👩</div>
+                <h3 class="card-title justify-center text-white text-lg">Women</h3>
+                <p class="text-white opacity-70 text-sm mb-4">Elegant fashion for women</p>
+                <a href="{% url 'product_list' %}?category=Women" class="btn btn-secondary btn-sm w-full">Shop Women</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <div class="card-body text-center p-6">
+                <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">👦</div>
+                <h3 class="card-title justify-center text-white text-lg">Boys</h3>
+                <p class="text-white opacity-70 text-sm mb-4">Cool clothes for boys</p>
+                <a href="{% url 'product_list' %}?category=Boys" class="btn btn-accent btn-sm w-full">Shop Boys</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <div class="card-body text-center p-6">
+                <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">👧</div>
+                <h3 class="card-title justify-center text-white text-lg">Girls</h3>
+                <p class="text-white opacity-70 text-sm mb-4">Pretty dresses for girls</p>
+                <a href="{% url 'product_list' %}?category=Girls" class="btn btn-info btn-sm w-full">Shop Girls</a>
+            </div>
+        </div>
+        
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <div class="card-body text-center p-6">
+                <div class="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">👶</div>
+                <h3 class="card-title justify-center text-white text-lg">Toddler</h3>
+                <p class="text-white opacity-70 text-sm mb-4">Comfortable baby clothes</p>
+                <a href="{% url 'product_list' %}?category=Toddler" class="btn btn-success btn-sm w-full">Shop Toddler</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Products Section -->
+<div class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-12 text-white">
+        <span class="text-gradient">Recent Products</span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for product in recent_products|slice:":8" %}
+        <div class="card glass-effect hover:scale-105 transition-all duration-300 group">
+            <figure class="px-4 pt-4">
+                {% if product.pr_images %}
+                    <img src="{{ product.pr_images.url }}" alt="{{ product.pr_name }}" class="rounded-xl h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                {% else %}
+                    <div class="bg-base-300 rounded-xl h-48 w-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                        <i class="fas fa-tshirt text-6xl text-white opacity-50"></i>
+                    </div>
+                {% endif %}
+            </figure>
+            <div class="card-body">
+                <h3 class="card-title text-white text-lg">{{ product.pr_name }}</h3>
+                <p class="text-white opacity-70 text-sm">{{ product.pr_cate }}</p>
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-2xl font-bold text-primary">${{ product.pr_price }}</div>
+                    <div class="rating rating-sm">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= product.pr_reviews %}
+                                <input type="radio" name="rating-{{ product.pr_id }}" class="mask mask-star-2 bg-orange-400" checked disabled />
+                            {% else %}
+                                <input type="radio" name="rating-{{ product.pr_id }}" class="mask mask-star-2 bg-orange-400" disabled />
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="card-actions justify-end">
+                    <a href="{% url 'product_detail' product.pr_id %}" class="btn btn-primary btn-sm">View Details</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add_to_cart' product.pr_id %}" class="btn btn-outline btn-sm text-white border-white hover:bg-white hover:text-gray-900">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-12">
+            <div class="text-6xl mb-4 animate-pulse-slow">👕</div>
+            <h3 class="text-xl font-semibold mb-2 text-white">No products available</h3>
+            <p class="text-white opacity-70">Check back soon for new arrivals!</p>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% if recent_products %}
+    <div class="text-center mt-8">
+        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">View All Products</a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Features Section -->
+<div class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-center mb-12 text-white">
+        <span class="text-gradient">Why Choose ChazeFashion?</span>
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center group">
+            <div class="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🚚</div>
+            <h3 class="text-xl font-semibold mb-4 text-white">Fast Delivery</h3>
+            <p class="text-white opacity-70">Get your fashion items delivered to your doorstep quickly and safely with our premium shipping service.</p>
+        </div>
+        <div class="text-center group">
+            <div class="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">💎</div>
+            <h3 class="text-xl font-semibold mb-4 text-white">Quality Products</h3>
+            <p class="text-white opacity-70">We offer only the highest quality clothing and accessories from trusted brands and designers.</p>
+        </div>
+        <div class="text-center group">
+            <div class="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">🛡️</div>
+            <h3 class="text-xl font-semibold mb-4 text-white">Secure Shopping</h3>
+            <p class="text-white opacity-70">Your security is our priority with safe and secure payment options and data protection.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter Section -->
+<div class="container mx-auto px-4 py-12">
+    <div class="card glass-effect max-w-2xl mx-auto">
+        <div class="card-body text-center">
+            <h3 class="text-2xl font-bold mb-4 text-white">Stay Updated</h3>
+            <p class="text-white opacity-70 mb-6">Subscribe to our newsletter for the latest fashion trends and exclusive offers.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Enter your email" class="input input-bordered flex-1 bg-white bg-opacity-10 border-white border-opacity-20 text-white placeholder-white placeholder-opacity-50" />
+                <button class="btn btn-primary">Subscribe</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Statistics Section -->
+<div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="stat glass-effect text-center">
+            <div class="stat-figure text-primary">
+                <i class="fas fa-users text-3xl"></i>
+            </div>
+            <div class="stat-title text-white opacity-70">Happy Customers</div>
+            <div class="stat-value text-primary">10K+</div>
+            <div class="stat-desc text-white opacity-60">Satisfied shoppers</div>
+        </div>
+        
+        <div class="stat glass-effect text-center">
+            <div class="stat-figure text-secondary">
+                <i class="fas fa-shipping-fast text-3xl"></i>
+            </div>
+            <div class="stat-title text-white opacity-70">Fast Delivery</div>
+            <div class="stat-value text-secondary">24h</div>
+            <div class="stat-desc text-white opacity-60">Average delivery time</div>
+        </div>
+        
+        <div class="stat glass-effect text-center">
+            <div class="stat-figure text-accent">
+                <i class="fas fa-star text-3xl"></i>
+            </div>
+            <div class="stat-title text-white opacity-70">Customer Rating</div>
+            <div class="stat-value text-accent">4.9</div>
+            <div class="stat-desc text-white opacity-60">Out of 5 stars</div>
+        </div>
+        
+        <div class="stat glass-effect text-center">
+            <div class="stat-figure text-success">
+                <i class="fas fa-award text-3xl"></i>
+            </div>
+            <div class="stat-title text-white opacity-70">Years Experience</div>
+            <div class="stat-value text-success">5+</div>
+            <div class="stat-desc text-white opacity-60">In fashion industry</div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

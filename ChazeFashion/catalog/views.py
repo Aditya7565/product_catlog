@@ -15,6 +15,32 @@ def home(request):
     }
     return render(request, 'catalog/home.html', context)
 
+def dashboard(request):
+    """Dashboard page with statistics and quick actions"""
+    # Get statistics
+    total_products = Product.objects.count()
+    total_categories = len(Product.CATEGORY_CHOICES)
+    
+    # Get recent products
+    recent_products = Product.objects.all().order_by('-pr_id')[:8]
+    
+    # Get wishlist count for authenticated users
+    wishlist_count = 0
+    if request.user.is_authenticated:
+        try:
+            user_wishlist = Wishlist.objects.get(user=request.user)
+            wishlist_count = user_wishlist.products.count()
+        except Wishlist.DoesNotExist:
+            pass
+    
+    context = {
+        'total_products': total_products,
+        'total_categories': total_categories,
+        'wishlist_count': wishlist_count,
+        'recent_products': recent_products,
+    }
+    return render(request, 'catalog/dashboard.html', context)
+
 def signup(request):
     """User registration"""
     if request.method == 'POST':
