@@ -58,7 +58,3 @@ ProductCatlog-master/
 
 6. **Access the app:**
    - Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
-
-## License
-
-This project is for educational
